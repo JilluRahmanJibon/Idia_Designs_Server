@@ -12,7 +12,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
 		const token = req.headers.authorization;
 
 		// checking if the token is missing
-		if (!token) {
+		if (!token || token === "null") {
 			throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
 		}
 
@@ -24,7 +24,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
 				config.jwt_access_secret as string
 			) as JwtPayload;
 		} catch (err) {
-			console.log("🚀 ~ returncatchAsync ~ err:", err)
+			console.log("🚀 ~ returncatchAsync ~ err:", err);
 			throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
 		}
 		const { role, userEmail } = decoded;

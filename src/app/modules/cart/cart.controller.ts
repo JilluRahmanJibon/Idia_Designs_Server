@@ -3,17 +3,45 @@ import sendResponse from "../../utils/sendResponse";
 import { CartService } from "./cart.service";
 import httpStatus from "http-status";
 
-const addToCart = catchAsync(async (req, res) => {
+const addCartItem = catchAsync(async (req, res) => {
+	const { userEmail } = req.user;
 	const data = req.body;
 
-	const result = await CartService.addToCartInToDB(data);
+	const result = await CartService.addCartItemInToDB(data, userEmail);
 
 	sendResponse(res, {
 		statusCode: httpStatus.OK,
 		success: true,
-		message: `The ${result.productName} added to your cart!`,
+		message: `This item added to your cart successfully!`,
 		data: result,
 	});
 });
 
-export const CartController = { addToCart };
+const getCartItems = catchAsync(async (req, res) => {
+	const { userEmail } = req.user;
+
+	const result = await CartService.getCartItemsInToDB(userEmail);
+
+	sendResponse(res, {
+		statusCode: httpStatus.OK,
+		success: true,
+		message: `Cart items retrieved successfully!`,
+		data: result,
+	});
+});
+
+const removeCartItem= catchAsync(async (req, res) => {
+	const { userEmail } = req.user;
+	const {id}=req.params
+
+	const result = await CartService.removeCartItemInToDB(userEmail,id);
+
+	sendResponse(res, {
+		statusCode: httpStatus.OK,
+		success: true,
+		message: `This item delete from you cart!`,
+		data: result,
+	});
+});
+
+export const CartController = { addCartItem, getCartItems ,removeCartItem};
