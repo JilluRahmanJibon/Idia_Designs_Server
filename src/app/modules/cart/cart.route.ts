@@ -3,7 +3,7 @@ import { CartController } from "./cart.controller";
 
 const router = Router()
 
-router.post('/',CartController.addToCart)
+router.post('/add-to-cart',CartController.addToCart)
 
 
 export const CartRoutes = router

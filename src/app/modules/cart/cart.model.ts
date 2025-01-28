@@ -5,7 +5,7 @@ const CartSchema = new Schema<ICart>(
 	{
 		userId: { type: Schema.Types.ObjectId, ref: "User" },
 		userEmail: { type: String, required: true },
-		productId: { type: Schema.Types.ObjectId, required: true },
+		productId: { type: Schema.Types.ObjectId, required: true, ref: "Portfolio" },
 		productName: { type: String, required: true },
 		price: { type: Number, required: true, min: 0 },
 		picture: { type: String, required: true },
@@ -13,5 +13,5 @@ const CartSchema = new Schema<ICart>(
 	{ timestamps: true }
 );
 
-// Mongoose model creation
+
 export const Cart = model<ICart>("Cart", CartSchema);

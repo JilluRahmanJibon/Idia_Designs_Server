@@ -1,7 +1,7 @@
 import Stripe from "stripe";
-import AppError from "../../errors/AppError";
-import { IPurchase } from "./purchase.interface";
-import { Purchase } from "./purchase.model";
+// import AppError from "../../errors/AppError";
+// import { IPurchase } from "./purchase.interface";
+// import { Purchase } from "./purchase.model";
 
 // Stripe instance
 const stripe = new Stripe(
@@ -9,19 +9,16 @@ const stripe = new Stripe(
 );
 
 // Function to create a purchase in DB after successful payment
-const createPurchaseInToDB = async (payload) => {
-const amount = payload.totalAmount * 100;
-
-
+const createPurchaseInToDB = async (totalAmount:number) => {
+	const amount = totalAmount * 100;
 
 	const paymentIntent = await stripe.paymentIntents.create({
 		amount: amount,
 		currency: "usd",
 		payment_method_types: ["card"],
 	});
-	
 
-	return {clientSecret:paymentIntent.client_secret} ;
+	return { clientSecret: paymentIntent.client_secret };
 };
 
 export const PurchaseService = { createPurchaseInToDB };

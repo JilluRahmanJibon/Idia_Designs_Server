@@ -5,7 +5,7 @@ import httpStatus from "http-status";
 
 const createPurchase = catchAsync(async (req, res) => {
 	const data = req.body;
-	const result = await PurchaseService.createPurchaseInToDB(data);
+	const result = await PurchaseService.createPurchaseInToDB(data?.totalAmount);
 	sendResponse(res, {
 		statusCode: httpStatus.OK,
 		success: true,

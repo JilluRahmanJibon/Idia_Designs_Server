@@ -11,7 +11,7 @@ const addToCart = catchAsync(async (req, res) => {
 	sendResponse(res, {
 		statusCode: httpStatus.OK,
 		success: true,
-		message: "PaymentIntent create successfully!",
+		message: `The ${result.productName} added to your cart!`,
 		data: result,
 	});
 });
