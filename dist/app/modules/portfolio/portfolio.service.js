@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PortfolioServices = void 0;
 const portfolio_model_1 = require("./portfolio.model");
 const getPortfolioInToDB = async () => {
-    const result = await portfolio_model_1.Portfolio.find({}, "title picture");
+    const result = await portfolio_model_1.Portfolio.find({}, "title picture service");
     return result;
 };
 const getSinglePortfolioInToDB = async (id) => {

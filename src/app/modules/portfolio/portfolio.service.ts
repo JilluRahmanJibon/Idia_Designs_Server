@@ -1,7 +1,7 @@
 import { Portfolio } from "./portfolio.model";
 
 const getPortfolioInToDB = async () => {
-	const result = await Portfolio.find({}, "title picture");
+	const result = await Portfolio.find({}, "title picture service");
 	return result;
 };
 const getSinglePortfolioInToDB = async(id:string) => {

@@ -13,7 +13,7 @@ const auth = (...requiredRoles) => {
     return (0, catchAsync_1.default)(async (req, res, next) => {
         const token = req.headers.authorization;
         // checking if the token is missing
-        if (!token) {
+        if (!token || token === "null") {
             throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, "You are not authorized!");
         }
         // checking if the given token is valid
